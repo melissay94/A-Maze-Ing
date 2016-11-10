@@ -30,6 +30,17 @@ app.main = {
     animationID : 0,
     player: undefined,
     
+    // Game state variables
+    paused: false,
+    gameState: undefined,
+    STATES: Object.freeze({
+        TITLE: 0,
+        START: 1,
+        INPLAY: 2,
+        LEVEL_OVER: 3,
+        END: 4
+    }),
+    
     level1: [
         { x: 60, y: 0, width: 20, height: 500}, 
         { x: 60, y: 500, width: 250, height: 20},
@@ -79,6 +90,32 @@ app.main = {
     
     },
     
+    drawHUD: function(ctx) {
+        ctx.save();
+        
+        if (this.gameState == this.STATES.TITLE){
+            
+        }
+        
+        if (this.gameState == this.STATES.START){
+            
+        }
+        
+        if (this.gameState == this.STATES.INPLAY){
+            
+        }
+        
+        if (this.gameState == this.STATES.LEVEL_OVER){
+            
+        }
+        
+        if (this.gameState == this.STATES.END){
+            
+        }
+        
+        ctx.restore();
+    },
+    
     makePlayer: function() {
       
         var playerDraw = function(ctx) {
@@ -100,7 +137,6 @@ app.main = {
         player.width = this.PLAYER.WIDTH;
         player.height = this.PLAYER.HEIGHT;
         
-        var randVect = getRandomUnitVector();
         player.xSpeed = this.direction.left + this.direction.right;
         player.ySpeed = this.direction.up + this.direction.down;
         player.speed = this.PLAYER.MAX_SPEED;
