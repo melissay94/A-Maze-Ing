@@ -40,6 +40,8 @@ app.main = {
         LEVEL_OVER: 3,
         END: 4
     }),
+
+    image: document.getElementById("bg-map"),
     
     level1: [
         { x: 60, y: 0, width: 20, height: 500}, 
@@ -79,8 +81,7 @@ app.main = {
         this.movePlayer(dt, this.level1);
         
         // Redraw background first
-        this.ctx.fillStyle = "aliceblue"; 
-		this.ctx.fillRect(0,0,this.WIDTH,this.HEIGHT); 
+        this.ctx.drawImage(this.image, 0, 0);
         
         // Draw player
         this.ctx.fillStyle = "black";
