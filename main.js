@@ -73,7 +73,7 @@ app.main = {
         
         var dt = this.calculateDT();
         if (this.gameState == this.STATES.PLAY){
-            this.player.move(dt);
+            this.movePlayer(dt);
             this.loadLevel(this.ctx, 0);
         }
         
@@ -93,7 +93,7 @@ app.main = {
             ctx.arc(data.coins[i].x, data.coins[i].y, 10, Math.PI * 2, 0);
             ctx.fill();
         }
-        this.player.start( data.playerStart.x, data.playerStart.y);
+       // this.player.start( data.playerStart.x, data.playerStart.y);
         this.player.draw(ctx);
         ctx.restore();
     },
@@ -123,15 +123,28 @@ app.main = {
         player.move = movePlayer;
         player.start = setPlayerStart;
         
-        player.x = 0;
-        player.y = 0;
-        player.xSpeed = this.direction.left + this.direction.right;
-        player.ySpeed = this.direction.up + this.direction.down;
+        player.x = 10;
+        player.y = 540;
+        player.xSpeed = 0;
+        player.ySpeed = 0;
         player.speed = 50;
         
         Object.seal(player);
         return player;
         
+    },
+
+    movePlayer: function(dt) {
+
+        this.player.xSpeed = this.direction.left + this.direction.right;
+        this.player.ySpeed = this.direction.up + this.direction.down;
+        
+        this.player.move(dt);
+    },
+
+    checkCollision: function() {
+        var imgData = this.ctx.getImageData(this.player.x, this.player.y, 20, 20);
+        console.log(imgData);
     },
     
     doMousedown: function(e) {
