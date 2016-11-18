@@ -3,19 +3,28 @@
     <head>
         <title>A-Maze-Ing</title>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="style.css" type="text/css" />
+        <style>
+            canvas {
+                font-family: 'Delius Unicase', cursive;
+            }
+        </style>
+        <link href="https://fonts.googleapis.com/css?family=Delius+Unicase" rel="stylesheet" />
     </head>
     <body>
-        <h1>A-Maze-Ing</h1>
+        <h1>Quick Made</h1>
         <div id="styleCentral">
             <canvas id="myCanvas" width="800" height="600">
                 If you can see me, it's time to retire that browser
             </canvas>
         </div>
+        <section id="audioCtrls" style="display:none">
+		  <audio id="bgAudio" src="media/Lost-Jungle_Looping.mp3" style="display:none;" controls loop></audio>
+        </section>
         <img src="media/Background.png" alt="bg" style="display:none;" id="bg-map" />
-        <script src="JS/loader.js" type="text/javascript"></script>
-        <script src="JS/main.js" type="text/javascript"></script>
-        <script src="JS/keyControls.js" type="text/javascript"></script>
-        <script src="JS/utilities.js" type="text/javascript"></script>
+        <script src="loader.js" type="text/javascript"></script>
+        <script src="main.js" type="text/javascript"></script>
+        <script src="utilities.js" type="text/javascript"></script>
+        <script src="sounds.js" type="text/javascript"></script>
+        <script src="gameData.js" type="text/javascript"></script>
     </body>
 </html>

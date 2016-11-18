@@ -1,0 +1,9 @@
+Documentation:
+
+I really don't have anything to say for this game because it's not a game. 
+1) It has background music
+2) It loads in the image for the background
+3) It cycles through at least three screens
+
+I made the background
+I got the music from soundImage.org/fantasyWonder
