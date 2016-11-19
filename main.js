@@ -37,6 +37,9 @@ app.main = {
         left: 0,
         right: 0
     },
+    collision: false,
+    xVelocity: 1,
+    yVelocity: 1,
     
     // Enemies
     enemies: [],
@@ -93,7 +96,7 @@ app.main = {
             ctx.arc(data.coins[i].x, data.coins[i].y, 10, Math.PI * 2, 0);
             ctx.fill();
         }
-       // this.player.start( data.playerStart.x, data.playerStart.y);
+       
         this.player.draw(ctx);
         ctx.restore();
     },
@@ -108,9 +111,9 @@ app.main = {
             ctx.restore();
         }
         
-        var movePlayer = function(dt) {
-            this.x += this.xSpeed * this.speed * dt;
-            this.y += this.ySpeed * this.speed * dt;
+        var movePlayer = function(dt, xVel, yVel) {
+            this.x += this.xSpeed * this.speed * dt * xVel;
+            this.y += this.ySpeed * this.speed * dt * yVel;
         }
         
         var setPlayerStart = function(x, y) {
@@ -138,13 +141,20 @@ app.main = {
 
         this.player.xSpeed = this.direction.left + this.direction.right;
         this.player.ySpeed = this.direction.up + this.direction.down;
-        
-        this.player.move(dt);
+    
+        this.player.move(dt, this.xVelocity, this.yVelocity);
     },
 
-    checkCollision: function() {
-        var imgData = this.ctx.getImageData(this.player.x, this.player.y, 20, 20);
-        console.log(imgData);
+    checkCollision: function(x, y) {
+        var imgData = this.ctx.getImageData(x, y, 35, 35).data;
+        for (var i = 0; i < imgData.length; i += 4) {
+            if (imgData[i] == 0) {
+                this.collision = true;
+            } else {
+                this.collision = false;
+            }
+        }
+        
     },
     
     doMousedown: function(e) {
@@ -190,6 +200,21 @@ app.main = {
             // Down 
             if (key == 40 || key == 83)
                 this.direction.down = 0;
+        }
+        
+        if (this.direction.up != 0 || this.direction.down != 0) {
+            this.checkCollision(this.player.x, this.player.y);
+            if (this.collision)
+                this.xVelocity = -1;
+            else
+                this.xVelocity = 1;
+        }
+        if (this.direction.left != 0 || this.direction.right != 0) {
+            this.checkCollision(this.player.x, this.player.y);
+            if (this.collision)
+                this.yVelocity = -1;
+            else 
+                this.yVelocity = 1;
         }
         
     },
